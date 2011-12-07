@@ -1,0 +1,17 @@
+## Vim JS Beautify
+
+Uses Node.js to run js-beautify on the current buffer.
+
+Requires: Node.js
+
+Usage:
+
+    :JSBeautify
+
+Processes whole file by default, but using a range may also work.
+
+You could map to a key in .vimrc, eg:
+
+    nmap <leader>b :JSBeautify<cr>
+
+Warning: may take a while for large files

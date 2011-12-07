@@ -1,0 +1,31 @@
+#!/usr/bin/node
+/*jslint node:true*/
+
+var fs = require('fs'),
+    js_beautify = require('./beautify').js_beautify,
+    input_file,
+    ugly_js = '',
+    stdin,
+    result;
+
+//if given a file, process it
+if (process.argv.length > 2) {
+    input_file = process.argv[2];
+    ugly_js = fs.readFileSync(input_file, 'utf8');
+    result = js_beautify(ugly_js);
+    console.log(result);
+} else {
+    //use std in
+    stdin = process.openStdin();
+    stdin.setEncoding('utf8');
+
+    stdin.on('data', function (chunk) {
+        ugly_js += chunk;
+    });
+
+    stdin.on('end', function () {
+        result = js_beautify(ugly_js);
+        process.stdout.write(result);
+    });
+
+}
